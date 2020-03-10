@@ -1,0 +1,1 @@
+export const CAMERA_PERMISSION_GRANTED = 'granted';
