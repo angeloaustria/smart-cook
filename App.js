@@ -1,41 +1,21 @@
 import React, { useState } from 'react';
 import {
-  Modal,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
+import MainModal from "./components/MainModal";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-      <View style={styles.container}>
-        <Modal
-            animationType="slide"
-            transparent={false}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-            }}>
-          <View style={modalStyle.outerContainer}>
-            <View style={modalStyle.innerContainer}>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
-
+      <View style={styles.container} onTouchStart={() => {setModalVisible(!modalVisible);}}>
         <TouchableHighlight onPress={() => {setModalVisible(true);}}>
           <Text>Show Modal</Text>
         </TouchableHighlight>
+        <MainModal visible={modalVisible}/>
       </View>
   );
 }
@@ -47,19 +27,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
-
-const modalStyle = StyleSheet.create({
-  outerContainer: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-  innerContainer: {
-    alignItems: 'center',
-    backgroundColor: '#32a852',
-    height: '30%',
-    width: '100%'
-  }
+  title: {
+    fontSize: 32,
+  },
 });
