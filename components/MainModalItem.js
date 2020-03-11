@@ -5,11 +5,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-export default function MainModalItem({onPress}) {
+export default function MainModalItem({text, onPress}) {
   return (
       <>
         <TouchableHighlight style={modalItemStyle.item} onPress={() => onPress()}>
-          <Text style={modalItemStyle.text}>Hide Modal!</Text>
+          <Text style={modalItemStyle.text}>{text}</Text>
         </TouchableHighlight>
       </>
   )
@@ -17,7 +17,8 @@ export default function MainModalItem({onPress}) {
 
 const modalItemStyle = StyleSheet.create({
   item: {
-    padding: 20,
+    padding: 15,
+    width: '100%'
   },
   text: {
     fontSize: 20

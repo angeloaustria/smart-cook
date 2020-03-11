@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,12 +10,14 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(true);
 
   return (
-    <>
-      <TouchableOpacity style={styles.container} onPress={() => {setModalVisible(!modalVisible);}}>
-        <Text>Show Modal</Text>
-      </TouchableOpacity>
-      <MainModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-    </>
+      <>
+        <TouchableOpacity style={styles.container} onPress={() => {
+          setModalVisible(!modalVisible);
+        }}>
+          <Text>Show Modal</Text>
+        </TouchableOpacity>
+        <MainModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+      </>
   );
 }
 
@@ -25,14 +27,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
+  }
 });

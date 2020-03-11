@@ -6,8 +6,22 @@ import {
   View
 } from 'react-native';
 import MainModalItem from "./MainModalItem";
+import * as ImagePicker from "expo-image-picker";
 
 export default function MainModal({modalVisible, setModalVisible}) {
+
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+  };
+
   return (
       <>
         <Modal
@@ -23,9 +37,15 @@ export default function MainModal({modalVisible, setModalVisible}) {
           >
             <TouchableWithoutFeedback>
               <View style={modalStyle.innerContainer}>
-                <MainModalItem onPress={() => {
-                  console.log('hello');
-                }}/>
+                <MainModalItem
+                    text={'Open from Device'}
+                    onPress={async () => {
+                      await openImagePickerAsync()
+                    }}/>
+                <MainModalItem
+                    text={'Camera'}
+                    onPress={null}
+                />
               </View>
             </TouchableWithoutFeedback>
           </TouchableOpacity>
