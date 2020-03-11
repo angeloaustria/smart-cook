@@ -8,7 +8,7 @@ import {
 import MainModalItem from "./MainModalItem";
 import * as ImagePicker from "expo-image-picker";
 
-export default function MainModal({modalVisible, setModalVisible}) {
+export default function MainModal({modalVisible, setModalVisible, setImage}) {
 
   let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
@@ -19,14 +19,16 @@ export default function MainModal({modalVisible, setModalVisible}) {
     }
 
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
-    console.log(pickerResult);
+    setImage(pickerResult);
+    setModalVisible(false);
+    // console.log(pickerResult);
   };
 
   return (
       <>
         <Modal
             animationType="slide"
-            transparent={false}
+            transparent={true}
             visible={modalVisible}>
           <TouchableOpacity
               style={modalStyle.outerContainer}
@@ -42,10 +44,6 @@ export default function MainModal({modalVisible, setModalVisible}) {
                     onPress={async () => {
                       await openImagePickerAsync()
                     }}/>
-                <MainModalItem
-                    text={'Camera'}
-                    onPress={null}
-                />
               </View>
             </TouchableWithoutFeedback>
           </TouchableOpacity>

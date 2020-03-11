@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -8,15 +9,23 @@ import MainModal from "./components/MainModal";
 
 export default function App() {
   const [modalVisible, setModalVisible] = useState(true);
+  const [image, setImage] = useState(null);
+
+  let setPic = (img) => {
+    setImage(img);
+    console.log("setting pic...")
+  };
 
   return (
       <>
         <TouchableOpacity style={styles.container} onPress={() => {
-          setModalVisible(!modalVisible);
+          !image && setModalVisible(!modalVisible);
         }}>
-          <Text>Show Modal</Text>
+          {image && <Image source={{uri: image.uri}} style={{width: '100%', height: '50%'}}/>}
+          {image && <Text>Analyze Image</Text>}
+          {image && <Text onPress={() => setModalVisible(!modalVisible)}>Open</Text>}
         </TouchableOpacity>
-        <MainModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+        <MainModal modalVisible={modalVisible} setModalVisible={setModalVisible} setImage={setPic}/>
       </>
   );
 }
