@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {
   Image,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
+  View
 } from 'react-native';
+import {LinearGradient} from 'expo-linear-gradient';
 import MainModal from "./components/MainModal";
 
 export default function App() {
@@ -18,6 +21,10 @@ export default function App() {
 
   return (
       <>
+        <LinearGradient colors={['#32a852', '#d13e60']} style={styles.header}>
+          <StatusBar barStyle="light-content" />
+          <Text>SmartCook</Text>
+        </LinearGradient>
         <TouchableOpacity style={styles.container} onPress={() => {
           !image && setModalVisible(!modalVisible);
         }}>
@@ -31,8 +38,14 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    flex: 6,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
