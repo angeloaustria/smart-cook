@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableHighlight,
-  View
+  TouchableOpacity,
 } from 'react-native';
 import MainModal from "./components/MainModal";
 
 export default function App() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
 
   return (
-      <View style={styles.container} onTouchStart={() => {setModalVisible(!modalVisible);}}>
-        <TouchableHighlight onPress={() => {setModalVisible(true);}}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
-        <MainModal visible={modalVisible}/>
-      </View>
+    <>
+      <TouchableOpacity style={styles.container} onPress={() => {setModalVisible(!modalVisible);}}>
+        <Text>Show Modal</Text>
+      </TouchableOpacity>
+      <MainModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+    </>
   );
 }
 
